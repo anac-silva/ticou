@@ -1,10 +1,12 @@
-import { Header } from "../components/header";
-
+import { Sidebar } from "../components/sidebar";
 
 export function TaskPage(){
     return(
-        <Header/>
-
-        
+        <main className="flex">
+            <Sidebar/>
+            <div>
+                conteúdo principal
+            </div>
+        </main>
     )
 }
