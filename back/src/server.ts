@@ -9,8 +9,6 @@ type Tarefa = {
     prazo: string;
 };
 
-const tarefas: Tarefa[] = [];
-
 const app = express();
 const port = 3000;
 
@@ -20,30 +18,26 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use(express.json());
-
 app.get("/", (_request, response) => {
     response.json({
         message: "API do ticou funcionou!"
     })
 })
 
-app.post("/api/tasks", (request: Request, response: Response) => {
+app.post("/api/tasks", async (request: Request, response: Response) => {
     const {atividade, prazo} = request.body;
 
-    const novaTarefa: Tarefa = {
-        id: tarefas.length + 1,
-        atividade: atividade,
-        prazo: prazo,
-    }
-
-    tarefas.push(novaTarefa);
-
-    console.log(atividade);
-    console.log(prazo);
-
-    console.log(tarefas);
+    const resultado = await database.query(
+        `INSERT INTO tarefas (atividade, prazo) 
+        VALUES ($1, $2) 
+        RETURNING id, atividade, prazo`,
+        [atividade, prazo]
+    );
+    
+    console.log(resultado.rows[0]);
 });
+
+
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

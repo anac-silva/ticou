@@ -1,13 +1,12 @@
-import { DatabaseSync } from "node:sqlite";
+import "dotenv/config";
+import { Pool } from "pg";
 
-const database = new DatabaseSync("tarefas.db");
-
-database.exec(`
-    CREATE TABLE IF NOT EXISTS tarefas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        atividade TEXT NOT NULL,
-        prazo TEXT NOT NULL
-    )
-`);
+const database = new Pool({
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
 
 export { database };
