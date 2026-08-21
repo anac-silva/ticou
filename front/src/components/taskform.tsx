@@ -35,7 +35,7 @@ export function Formulario() {
                     atividade: event.target.value
                     })
                 }
-                className="w-md py-2 px-2 rounded-lg border-2 border-gray-300 focus:border-[#ADB3FF] focus:outline-none"/>
+                className="w-[280px] py-2 px-2 rounded-lg border-2 border-gray-300 focus:border-[#ADB3FF] focus:outline-none mx-1"/>
                 <input 
                 type="date"
                 value={tarefa.prazo}
@@ -47,8 +47,6 @@ export function Formulario() {
                 className="w-[150px] py-2 px-2 rounded-lg border-2 border-gray-300 focus:border-[#ADB3FF] focus:outline-none"/>
                 <button type="submit" className="py-2 px-2 rounded-lg border-2 bg-[#ADB3FF] border-transparent mx-2">Salvar</button>
             </form>
-
-            <p> tarefa {tarefa.atividade} será feita dia {tarefa.prazo}</p>
         </>
     )
 }
