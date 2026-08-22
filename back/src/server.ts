@@ -37,7 +37,16 @@ app.post("/api/tasks", async (request: Request, response: Response) => {
     console.log(resultado.rows[0]);
 });
 
+app.get("/api/tasks", async (_request, response) => {
+    
+    const retorno = await database.query(
+        `SELECT id, atividade, prazo
+        FROM tarefas
+        ORDER BY id;`
+    );
 
+    response.json(retorno.rows);
+});
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
